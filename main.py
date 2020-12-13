@@ -9,15 +9,12 @@ data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'dataset/Admission_Pr
 data = data[['Serial No.', 'GRE Score', 'TOEFL Score', 'University Rating Attended', 'SOP', 'LOR', 'CGPA', 'Internship',
              'Chance of Admit']]
 
-predict = 'Chance of Admit'  # The attribute I predict
+predict = 'Chance of Admit'  # Attribute to predict
 
 X = np.array(data.drop([predict, 'Serial No.'], 1))  # 0-rows, 1-columns
 Y = np.array(data[predict])
 
 
-# I have to keep it above - one here and one in the loop as after training the values of x_train, x_test etc.
-# will be stored right below. I have to have it in that way as I'll be using them in the code where I'll be reading
-# the model and in the last for loop as well
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 
 '''
@@ -46,7 +43,7 @@ linear = pickle.load(pickle_in)
 accuracy = linear.score(x_test, y_test)
 
 
-print('The coefficients for the features are: ', linear.coef_, '\n')  # these are the a's from ax+b equation
+print('The coefficients for the features are: ', linear.coef_, '\n')  # "a" coefficient in ax+b equation
 print('The intercept is in the point: ', linear.intercept_, '\n')
 print('Standard Deviations of the features are: ', X.std(axis=0), '\n')
 
